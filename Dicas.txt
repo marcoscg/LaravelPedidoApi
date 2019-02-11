@@ -1,0 +1,62 @@
+composer create-project --prefer-dist laravel/laravel
+
+composer require "laravel-doctrine/orm"
+
+php artisan vendor:publish --provider="LaravelDoctrine\ORM\DoctrineServiceProvider"
+
+composer require tymon/jwt-auth:1.0.0-rc.3
+
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+
+php artisan jwt:secret
+
+composer require barryvdh/laravel-cors
+
+php artisan vendor:publish --provider="Barryvdh\Cors\ServiceProvider"
+
+** Pega as tabelas do banco de dados
+php artisan doctrine:convert:mapping --from-database annotation ./app/Entities
+
+Entities\Uva.php
+Repositories\UvaRepository.php
+
+php artisan make:controller UvaController --api
+php artisan make:request UvaRequest
+php artisan make:resource UvaResource
+php artisan make:resource UvasResource --collection
+
+Entities\Nacionalidade.php
+Repositories\NacionalidadeRepository.php
+
+php artisan make:controller NacionalidadeController --api
+php artisan make:request NacionalidadeRequest
+php artisan make:resource NacionalidadeResource
+php artisan make:resource NacionalidadesResource --collection
+
+Entities\Tipo.php
+Repositories\TipoRepository.php
+
+php artisan make:controller TipoController --api
+php artisan make:request TipoRequest
+php artisan make:resource TipoResource
+php artisan make:resource TiposResource --collection
+
+Entities\Vinho.php
+Repositories\VinhoRepository.php
+
+php artisan make:controller VinhoController --api
+php artisan make:request VinhoRequest
+php artisan make:resource VinhoResource
+php artisan make:resource VinhosResource --collection
+
+
+sudo php artisan optimize
+sudo php artisan config:cache
+sudo php artisan route:cache
+
+
+
+php artisan make:controller CidadeController --api
+php artisan make:request CidadeRequest
+php artisan make:resource CidadeResource
+php artisan make:resource CidadesResource --collection

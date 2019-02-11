@@ -10,6 +10,33 @@ use App\Http\Resources\UfResource;
 use App\Http\Resources\UfsResource;
 use App\Http\Requests\UfRequest As Request;
 
+/**
+ * @SWG\Get(
+ *   path="/uf",
+ *   summary="Lista UFs",
+ *   @SWG\Response(response=200, description="successful operation"),
+ *   @SWG\Response(response=406, description="not acceptable"),
+ *   @SWG\Response(response=500, description="internal server error")
+ * )
+ * 
+ * @SWG\Get(
+ *   path="/uf/{customerId}",
+ *   summary="Lista UFs",
+ *   operationId="getUf",
+ *   @SWG\Parameter(
+ *     name="customerId",
+ *     in="path",
+ *     description="Código da UF.",
+ *     required=true,
+ *     type="integer"
+ *   ),
+ *   @SWG\Response(response=200, description="successful operation"),
+ *   @SWG\Response(response=406, description="not acceptable"),
+ *   @SWG\Response(response=500, description="internal server error")
+ * )
+ *
+ */
+
 class UfController extends Controller
 {
 
@@ -17,7 +44,7 @@ class UfController extends Controller
 
     public function __construct(EntityManagerInterface $em)
     {
-        $this->middleware('auth:api');        
+        //$this->middleware('auth:api');        
         $this->repository = new UfRepository($em);    
     }
 

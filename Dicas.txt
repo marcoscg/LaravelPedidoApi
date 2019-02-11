@@ -60,3 +60,14 @@ php artisan make:controller CidadeController --api
 php artisan make:request CidadeRequest
 php artisan make:resource CidadeResource
 php artisan make:resource CidadesResource --collection
+
+
+####################################
+Swagger
+####################################
+
+composer require "darkaonline/l5-swagger"
+composer require "zircote/swagger-php:2.*"
+
+php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+

@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Uf
- *
  * @ORM\Table(name="uf")
  * @ORM\Entity
  */
@@ -14,7 +13,6 @@ class Uf extends AbstractEntity
 {
     /**
      * @var int
-     *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -23,14 +21,12 @@ class Uf extends AbstractEntity
 
     /**
      * @var string
-     *
      * @ORM\Column(name="uf", type="string", length=2, nullable=false, options={"fixed"=true})
      */
     protected $uf;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="descricao", type="string", length=45, nullable=false)
      */
     protected $descricao;

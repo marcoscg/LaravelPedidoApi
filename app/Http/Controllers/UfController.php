@@ -11,20 +11,25 @@ use App\Http\Resources\UfsResource;
 use App\Http\Requests\UfRequest As Request;
 
 /**
+ * 
  * @SWG\Get(
  *   path="/uf",
- *   summary="Lista UFs",
+ *   tags={"UF"}, 
+ *   summary="Solicita uma Lista UFs",
+ *   description="Retorna uma lista da UFs", 
  *   @SWG\Response(response=200, description="successful operation"),
  *   @SWG\Response(response=406, description="not acceptable"),
- *   @SWG\Response(response=500, description="internal server error")
+ *   security={{"ApiKeyAuth": {}}}, 
  * )
  * 
  * @SWG\Get(
- *   path="/uf/{customerId}",
- *   summary="Lista UFs",
+ *   path="/uf/{id}",
+ *   tags={"UF"},  
+ *   summary="Lista UFs", 
+ *   description="Retorna uma lista da UFs",  
  *   operationId="getUf",
  *   @SWG\Parameter(
- *     name="customerId",
+ *     name="id",
  *     in="path",
  *     description="Código da UF.",
  *     required=true,
@@ -32,10 +37,87 @@ use App\Http\Requests\UfRequest As Request;
  *   ),
  *   @SWG\Response(response=200, description="successful operation"),
  *   @SWG\Response(response=406, description="not acceptable"),
- *   @SWG\Response(response=500, description="internal server error")
+ *  security={{"ApiKeyAuth": {}}}, 
+ * )
+ * 
+ *
+ * @SWG\Post(
+ *     path="/uf",
+ *     tags={"UF"},
+ *     summary="Post to UF",
+ *     @SWG\Parameter(
+ *          name="body",
+ *          in="body",
+ *          required=true,
+ *          @SWG\Schema(
+ *              @SWG\Property(
+ *                  property="uf",
+ *                  type="string",
+ *                  maximum=2
+ *              ),
+ *              @SWG\Property(
+ *                  property="descricao",
+ *                  type="string"
+ *              )
+ *          )
+ *     ),
+ *     @SWG\Response(response=200, description="Example extended response"),
+ *     security={{"ApiKeyAuth": {}}}, 
  * )
  *
+ * @SWG\Put(
+ *     path="/uf/{id}",
+ *     tags={"UF"},
+ *     summary="Put to UF",
+  *   @SWG\Parameter(
+ *     name="id",
+ *     in="path",
+ *     description="Código da UF.",
+ *     required=true,
+ *     type="integer"
+ *   ), 
+ *     @SWG\Parameter(
+ *          name="body",
+ *          in="body",
+ *          required=true,
+ *          @SWG\Schema(
+ *              @SWG\Property(
+ *                  property="uf",
+ *                  type="string",
+ *                  maximum=2
+ *              ),
+ *              @SWG\Property(
+ *                  property="descricao",
+ *                  type="string"
+ *              )
+ *          )
+ *     ),
+ *     @SWG\Response(response=200, description="Example extended response"),
+  *    security={{"ApiKeyAuth": {}}},  
+ * )
+ * 
+ * 
+ * @SWG\Delete(
+ *   path="/uf/{id}",
+ *   tags={"UF"},  
+ *   summary="Deletar UFs", 
+ *   description="Deleta a UF no sistema",  
+ *   operationId="deleteUf",
+ *   @SWG\Parameter(
+ *     name="id",
+ *     in="path",
+ *     description="Código da UF.",
+ *     required=true,
+ *     type="integer"
+ *   ),
+ *   @SWG\Response(response=200, description="successful operation"),
+ *   @SWG\Response(response=404, description="not found"), 
+ *   security={{"ApiKeyAuth": {}}}, 
+ * )
+ *
+ * 
  */
+
 
 class UfController extends Controller
 {

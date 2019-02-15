@@ -28,7 +28,7 @@ class UfRepository extends EntityRepository
     /**
      * 
      */
-    public function all($field = '', $cond = '', $perPage = 5, $pageName = 'page')
+    public function all($field = '', $cond = '', $perPage = 25, $pageName = 'page')
     {
         $builder = $this->createQueryBuilder('u');     
         if ($field) {            

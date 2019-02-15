@@ -2,33 +2,85 @@
     "swagger": "2.0",
     "info": {
         "title": "Pedido API",
+        "description": "L5 Swagger API description",
+        "contact": {
+            "email": "darius@matulionis.lt"
+        },
         "version": "1.0.0"
     },
     "basePath": "/api",
+    "schemes": [
+        "http",
+        "https"
+    ],
     "paths": {
         "/uf": {
             "get": {
-                "summary": "Lista UFs",
+                "tags": [
+                    "UF"
+                ],
+                "summary": "Solicita uma Lista UFs",
+                "description": "Retorna uma lista da UFs",
                 "responses": {
                     "200": {
                         "description": "successful operation"
                     },
                     "406": {
                         "description": "not acceptable"
-                    },
-                    "500": {
-                        "description": "internal server error"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "UF"
+                ],
+                "summary": "Post to UF",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "uf": {
+                                    "type": "string",
+                                    "maximum": 2
+                                },
+                                "descricao": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Example extended response"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
             }
         },
-        "/uf/{customerId}": {
+        "/uf/{id}": {
             "get": {
+                "tags": [
+                    "UF"
+                ],
                 "summary": "Lista UFs",
+                "description": "Retorna uma lista da UFs",
                 "operationId": "getUf",
                 "parameters": [
                     {
-                        "name": "customerId",
+                        "name": "id",
                         "in": "path",
                         "description": "C\u00f3digo da UF.",
                         "required": true,
@@ -41,13 +93,93 @@
                     },
                     "406": {
                         "description": "not acceptable"
-                    },
-                    "500": {
-                        "description": "internal server error"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "UF"
+                ],
+                "summary": "Put to UF",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "C\u00f3digo da UF.",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "uf": {
+                                    "type": "string",
+                                    "maximum": 2
+                                },
+                                "descricao": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Example extended response"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "UF"
+                ],
+                "summary": "Deletar UFs",
+                "description": "Deleta a UF no sistema",
+                "operationId": "deleteUf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "C\u00f3digo da UF.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ]
             }
         }
     },
-    "definitions": {}
+    "definitions": {},
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
 }

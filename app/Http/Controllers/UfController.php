@@ -10,115 +10,6 @@ use App\Http\Resources\UfResource;
 use App\Http\Resources\UfsResource;
 use App\Http\Requests\UfRequest As Request;
 
-/**
- * 
- * @SWG\Get(
- *   path="/uf",
- *   tags={"UF"}, 
- *   summary="Solicita uma Lista UFs",
- *   description="Retorna uma lista da UFs", 
- *   @SWG\Response(response=200, description="successful operation"),
- *   @SWG\Response(response=406, description="not acceptable"),
- *   security={{"ApiKeyAuth": {}}}, 
- * )
- * 
- * @SWG\Get(
- *   path="/uf/{id}",
- *   tags={"UF"},  
- *   summary="Lista UFs", 
- *   description="Retorna uma lista da UFs",  
- *   operationId="getUf",
- *   @SWG\Parameter(
- *     name="id",
- *     in="path",
- *     description="Código da UF.",
- *     required=true,
- *     type="integer"
- *   ),
- *   @SWG\Response(response=200, description="successful operation"),
- *   @SWG\Response(response=406, description="not acceptable"),
- *  security={{"ApiKeyAuth": {}}}, 
- * )
- * 
- *
- * @SWG\Post(
- *     path="/uf",
- *     tags={"UF"},
- *     summary="Post to UF",
- *     @SWG\Parameter(
- *          name="body",
- *          in="body",
- *          required=true,
- *          @SWG\Schema(
- *              @SWG\Property(
- *                  property="uf",
- *                  type="string",
- *                  maximum=2
- *              ),
- *              @SWG\Property(
- *                  property="descricao",
- *                  type="string"
- *              )
- *          )
- *     ),
- *     @SWG\Response(response=200, description="Example extended response"),
- *     security={{"ApiKeyAuth": {}}}, 
- * )
- *
- * @SWG\Put(
- *     path="/uf/{id}",
- *     tags={"UF"},
- *     summary="Put to UF",
-  *   @SWG\Parameter(
- *     name="id",
- *     in="path",
- *     description="Código da UF.",
- *     required=true,
- *     type="integer"
- *   ), 
- *     @SWG\Parameter(
- *          name="body",
- *          in="body",
- *          required=true,
- *          @SWG\Schema(
- *              @SWG\Property(
- *                  property="uf",
- *                  type="string",
- *                  maximum=2
- *              ),
- *              @SWG\Property(
- *                  property="descricao",
- *                  type="string"
- *              )
- *          )
- *     ),
- *     @SWG\Response(response=200, description="Example extended response"),
-  *    security={{"ApiKeyAuth": {}}},  
- * )
- * 
- * 
- * @SWG\Delete(
- *   path="/uf/{id}",
- *   tags={"UF"},  
- *   summary="Deletar UFs", 
- *   description="Deleta a UF no sistema",  
- *   operationId="deleteUf",
- *   @SWG\Parameter(
- *     name="id",
- *     in="path",
- *     description="Código da UF.",
- *     required=true,
- *     type="integer"
- *   ),
- *   @SWG\Response(response=200, description="successful operation"),
- *   @SWG\Response(response=404, description="not found"), 
- *   security={{"ApiKeyAuth": {}}}, 
- * )
- *
- * 
- */
-
-
 class UfController extends Controller
 {
 
@@ -132,6 +23,17 @@ class UfController extends Controller
 
     /**
      * Display a listing of the resource.
+     * 
+     * @OA\Get(
+     *      path="/api/uf",
+     *      operationId="getUf",
+     *      tags={"UF"},
+     *      summary="Get list of ufs",
+     *      description="Returns list of ufs",
+     *      @OA\Response(response=200, description="successful operation", @OA\JsonContent),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      security={{"bearerAuth": {}}}
+     *     )
      *
      * @return \Illuminate\Http\Response
      */
@@ -152,6 +54,23 @@ class UfController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @OA\Post(
+     *     path="/api/uf",
+     *     tags={"UF"},
+     *     summary="Post a pet in the store with form data",
+     *     operationId="postUf",
+     *     @OA\Response(response=200, description="Invalid input", @OA\JsonContent),
+     *     @OA\Response(response=405, description="Invalid input"),
+     *     @OA\Response(response=422, description="Invalid input"),
+     *     security={{"bearerAuth": {}}},
+     *     @OA\RequestBody(
+     *         description="Create user object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/Uf")
+     *     )
+     * )
+     *      
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -172,7 +91,29 @@ class UfController extends Controller
 
     /**
      * Display the specified resource.
+     * 
+     * @OA\Get(
+     *      path="/api/uf/{id}",
+     *      operationId="getUfById",
+     *      tags={"UF"},
+     *      summary="Get uf information",
+     *      description="Returns uf data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Código id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearerAuth": {}}},
+     * )
      *
+     * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -188,6 +129,32 @@ class UfController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @OA\Put(
+     *     path="/api/uf/{id}",
+     *     tags={"UF"},
+     *     summary="Updates a pet in the store with form data",
+     *     operationId="putUf",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of uf that needs to be updated",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Invalid input", @OA\JsonContent), 
+     *     @OA\Response(response=405, description="Invalid input"),
+     *     @OA\Response(response=422, description="Invalid input"),
+     *     security={{"bearerAuth": {}}},
+     *     @OA\RequestBody(
+     *         description="Create user object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/Uf")
+     *     )
+     * )
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -208,6 +175,27 @@ class UfController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @OA\Delete(
+     *      path="/api/uf/{id}",
+     *      operationId="delUf",
+     *      tags={"UF"},
+     *      summary="Get uf information",
+     *      description="Returns uf data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Código id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearerAuth": {}}},
+     * )
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

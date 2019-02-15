@@ -26,6 +26,17 @@ class CidadeController extends Controller
 
     /**
      * Display a listing of the resource.
+     * 
+     * @OA\Get(
+     *      path="/api/cidade",
+     *      operationId="getCidade",
+     *      tags={"Cidade"},
+     *      summary="Lista de Cidades",
+     *      description="Retorna uma lista de cidades",
+     *      @OA\Response(response=200, description="successful operation", @OA\JsonContent),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      security={{"bearerAuth": {}}}
+     *     )
      *
      * @return \Illuminate\Http\Response
      */
@@ -71,6 +82,27 @@ class CidadeController extends Controller
 
     /**
      * Display the specified resource.
+     * 
+     * @OA\Get(
+     *      path="/api/cidade/{id}",
+     *      operationId="getCidadeById",
+     *      tags={"Cidade"},
+     *      summary="Pega as informações da Cidade",
+     *      description="Retorna os dados da cidade",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Código",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(response=200, description="successful operation", @OA\JsonContent),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearerAuth": {}}},
+     * )     
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -114,6 +146,27 @@ class CidadeController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @OA\Delete(
+     *      path="/api/cidade/{id}",
+     *      operationId="delCidade",
+     *      tags={"Cidade"},
+     *      summary="Exclui uma Cidade",
+     *      description="Excluir a cidade",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Código",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(response=200, description="successful operation", @OA\JsonContent),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearerAuth": {}}},
+     * )
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

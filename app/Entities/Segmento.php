@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="segmento")
  * @ORM\Entity
+ * @OA\Schema() 
  */
 class Segmento extends AbstractEntity
 {
@@ -18,6 +19,7 @@ class Segmento extends AbstractEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @OA\Property()
      */
     private $id;
 
@@ -25,6 +27,7 @@ class Segmento extends AbstractEntity
      * @var string
      *
      * @ORM\Column(name="descricao", type="string", length=100, nullable=false)
+     * @OA\Property()
      */
     private $descricao;
 

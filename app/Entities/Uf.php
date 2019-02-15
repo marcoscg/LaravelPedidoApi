@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * Uf
  * @ORM\Table(name="uf")
  * @ORM\Entity
- */
+ * @OA\Schema()
+  */
 class Uf extends AbstractEntity
 {
     /**
@@ -16,18 +17,21 @@ class Uf extends AbstractEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @OA\Property()
      */
     protected $id;
 
     /**
      * @var string
      * @ORM\Column(name="uf", type="string", length=2, nullable=false, options={"fixed"=true})
+     * @OA\Property() 
      */
     protected $uf;
 
     /**
      * @var string
      * @ORM\Column(name="descricao", type="string", length=45, nullable=false)
+     * @OA\Property()
      */
     protected $descricao;
 

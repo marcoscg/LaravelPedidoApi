@@ -8,27 +8,27 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 /**
- * @SWG\Swagger(
- *   basePath="/api",
- *   schemes={"http", "https"},
- *   @SWG\Info(
- *     title="Pedido API",
- *     version="1.0.0",
- *     description="L5 Swagger API description",
- *     @SWG\Contact(email="darius@matulionis.lt"), 
- *   ),
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="API Mobile",
+ *      description="API Mobile",
+ *      @OA\Contact(
+ *          email="marcos@agr-sistemas.com.br"
+ *      )
  * )
- */
+ */ 
 
- /**
- * @SWG\SecurityScheme(
- *   securityDefinition="ApiKeyAuth",
- *   type="apiKey",
- *   in="header",
- *   name="Authorization" 
+/**
+ * @OA\SecurityScheme(
+ *     type="apiKey",
+ *     description="Acess token",
+ *     name="Authorization",
+ *     in="header",
+ *     scheme="bearer",
+ *     bearerFormat= "JWT",
+ *     securityScheme="bearerAuth"
  * )
- */
- 
+ */ 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;

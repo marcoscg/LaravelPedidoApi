@@ -1,37 +1,148 @@
 {
-    "swagger": "2.0",
+    "openapi": "3.0.0",
     "info": {
-        "title": "Pedido API",
-        "description": "L5 Swagger API description",
+        "title": "API Mobile",
+        "description": "API Mobile",
         "contact": {
-            "email": "darius@matulionis.lt"
+            "email": "marcos@agr-sistemas.com.br"
         },
         "version": "1.0.0"
     },
-    "basePath": "/api",
-    "schemes": [
-        "http",
-        "https"
-    ],
     "paths": {
-        "/uf": {
+        "/api/cidade": {
             "get": {
                 "tags": [
-                    "UF"
+                    "Cidade"
                 ],
-                "summary": "Solicita uma Lista UFs",
-                "description": "Retorna uma lista da UFs",
+                "summary": "Lista de Cidades",
+                "description": "Retorna uma lista de cidades",
+                "operationId": "getCidade",
                 "responses": {
                     "200": {
-                        "description": "successful operation"
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
-                    "406": {
-                        "description": "not acceptable"
+                    "400": {
+                        "description": "Bad request"
                     }
                 },
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/cidade/{id}": {
+            "get": {
+                "tags": [
+                    "Cidade"
+                ],
+                "summary": "Pega as informações da Cidade",
+                "description": "Retorna os dados da cidade",
+                "operationId": "getCidadeById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Código",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cidade"
+                ],
+                "summary": "Exclui uma Cidade",
+                "description": "Excluir a cidade",
+                "operationId": "delCidade",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Código",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/uf": {
+            "get": {
+                "tags": [
+                    "UF"
+                ],
+                "summary": "Get list of ufs",
+                "description": "Returns list of ufs",
+                "operationId": "getUf",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
                     }
                 ]
             },
@@ -39,65 +150,75 @@
                 "tags": [
                     "UF"
                 ],
-                "summary": "Post to UF",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "properties": {
-                                "uf": {
-                                    "type": "string",
-                                    "maximum": 2
-                                },
-                                "descricao": {
-                                    "type": "string"
-                                }
+                "summary": "Post a pet in the store with form data",
+                "operationId": "postUf",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Uf"
                             }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
-                        "description": "Example extended response"
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    },
+                    "422": {
+                        "description": "Invalid input"
                     }
                 },
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "bearerAuth": []
                     }
                 ]
             }
         },
-        "/uf/{id}": {
+        "/api/uf/{id}": {
             "get": {
                 "tags": [
                     "UF"
                 ],
-                "summary": "Lista UFs",
-                "description": "Retorna uma lista da UFs",
-                "operationId": "getUf",
+                "summary": "Get uf information",
+                "description": "Returns uf data",
+                "operationId": "getUfById",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "C\u00f3digo da UF.",
+                        "description": "Código id",
                         "required": true,
-                        "type": "integer"
+                        "schema": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "successful operation"
                     },
-                    "406": {
-                        "description": "not acceptable"
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
                     }
                 },
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "bearerAuth": []
                     }
                 ]
             },
@@ -105,40 +226,50 @@
                 "tags": [
                     "UF"
                 ],
-                "summary": "Put to UF",
+                "summary": "Updates a pet in the store with form data",
+                "operationId": "putUf",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "C\u00f3digo da UF.",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "body",
-                        "in": "body",
+                        "description": "ID of uf that needs to be updated",
                         "required": true,
                         "schema": {
-                            "properties": {
-                                "uf": {
-                                    "type": "string",
-                                    "maximum": 2
-                                },
-                                "descricao": {
-                                    "type": "string"
-                                }
-                            }
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Uf"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "Example extended response"
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    },
+                    "422": {
+                        "description": "Invalid input"
                     }
                 },
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "bearerAuth": []
                     }
                 ]
             },
@@ -146,40 +277,76 @@
                 "tags": [
                     "UF"
                 ],
-                "summary": "Deletar UFs",
-                "description": "Deleta a UF no sistema",
-                "operationId": "deleteUf",
+                "summary": "Get uf information",
+                "description": "Returns uf data",
+                "operationId": "delUf",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "C\u00f3digo da UF.",
+                        "description": "Código id",
                         "required": true,
-                        "type": "integer"
+                        "schema": {
+                            "type": "integer"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "successful operation"
                     },
+                    "400": {
+                        "description": "Bad request"
+                    },
                     "404": {
-                        "description": "not found"
+                        "description": "Resource Not Found"
                     }
                 },
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "bearerAuth": []
                     }
                 ]
             }
         }
     },
-    "definitions": {},
-    "securityDefinitions": {
-        "ApiKeyAuth": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
+    "components": {
+        "schemas": {
+            "Segmento": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "descricao": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Uf": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "uf": {
+                        "type": "string"
+                    },
+                    "descricao": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "apiKey",
+                "description": "Acess token",
+                "name": "Authorization",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
         }
     }
 }

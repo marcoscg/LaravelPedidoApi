@@ -35,6 +35,45 @@
                         "bearerAuth": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Cidade"
+                ],
+                "summary": "Nova Cidade",
+                "operationId": "postCidade",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cidade"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    },
+                    "422": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/api/cidade/{id}": {
@@ -70,6 +109,57 @@
                     },
                     "404": {
                         "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cidade"
+                ],
+                "summary": "Atualiza uma cidade",
+                "operationId": "putCidade",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of uf that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cidade"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    },
+                    "422": {
+                        "description": "Invalid input"
                     }
                 },
                 "security": [
@@ -312,6 +402,20 @@
     },
     "components": {
         "schemas": {
+            "Cidade": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "descricao": {
+                        "type": "string"
+                    },
+                    "uf": {
+                        "$ref": "#/components/schemas/Uf"
+                    }
+                },
+                "type": "object"
+            },
             "Segmento": {
                 "properties": {
                     "id": {

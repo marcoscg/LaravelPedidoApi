@@ -58,6 +58,22 @@ class CidadeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @OA\Post(
+     *     path="/api/cidade",
+     *     tags={"Cidade"},
+     *     summary="Nova Cidade",
+     *     operationId="postCidade",
+     *     @OA\Response(response=200, description="Invalid input", @OA\JsonContent),
+     *     @OA\Response(response=405, description="Invalid input"),
+     *     @OA\Response(response=422, description="Invalid input"),
+     *     security={{"bearerAuth": {}}},
+     *     @OA\RequestBody(
+     *         description="Create user object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/Cidade")
+     *     )
+     * )
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -65,9 +81,13 @@ class CidadeController extends Controller
     {   
         $data = $request->all(); 
 
-        $uf = $this->repositoryUf->find($data['uf_id']);
+        $uf = $this->repositoryUf->find($data['uf']['id']);
         if (!$uf)
-            return response()->json(['message' => 'UF nao existe!'], 404);         
+            return response()->json(['message' => 'UF nao existe!'], 404);  
+            
+        unset($data['uf']);    
+
+        var_dump($data); die;
 
         $cidade = new Cidade();
         $cidade->setAll($data);
@@ -119,6 +139,32 @@ class CidadeController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @OA\Put(
+     *     path="/api/cidade/{id}",
+     *     tags={"Cidade"},
+     *     summary="Atualiza uma cidade",
+     *     operationId="putCidade",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of uf that needs to be updated",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Invalid input", @OA\JsonContent), 
+     *     @OA\Response(response=405, description="Invalid input"),
+     *     @OA\Response(response=422, description="Invalid input"),
+     *     security={{"bearerAuth": {}}},
+     *     @OA\RequestBody(
+     *         description="Create user object",
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/Cidade")
+     *     )
+     * )
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

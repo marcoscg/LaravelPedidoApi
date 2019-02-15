@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="cidade", indexes={@ORM\Index(name="fk_cidade_uf_idx", columns={"uf_id"})})
  * @ORM\Entity
+ * @OA\Schema() 
  */
 class Cidade extends AbstractEntity
 {
@@ -18,6 +19,7 @@ class Cidade extends AbstractEntity
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @OA\Property()
      */
     protected $id;
 
@@ -25,6 +27,7 @@ class Cidade extends AbstractEntity
      * @var string
      *
      * @ORM\Column(name="descricao", type="string", length=100, nullable=false)
+     * @OA\Property()
      */
     protected $descricao;
 
@@ -35,10 +38,9 @@ class Cidade extends AbstractEntity
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="uf_id", referencedColumnName="id")
      * })
+     * @OA\Property(ref="#/components/schemas/Uf")
      */
     protected $uf;
-
-
 
     /**
      * Get the value of id
